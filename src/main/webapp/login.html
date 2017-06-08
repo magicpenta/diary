@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户登录</title>
+
+<link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+<script language="javascript" src="js/AjaxRequest.js"></script>
+<script language="javascript">
+// 登录函数
+function loginSubmit(form){
+	if(form.userName.value==""){
+		alert("请输入用户名！");form.userName.focus();return false;
+	}
+	if(form.pwd.value==""){
+		alert("请输入密码！");form.pwd.focus();return false;
+	}
+	var param="userName="+form.userName.value+"&pwd="+form.pwd.value;
+	var loader=new net.AjaxRequest("UserServlet?action=login&nocache="+new Date().getTime(),deal_login,onerror,"POST",encodeURI(param));
+}
+function deal_login(){
+	var result=this.req.responseText;
+	result=result.replace(/\s/g,"");	
+	alert(result);
+	if(result=="登录成功！"){
+		window.location.href="DiaryServlet?action=listAllDiary";
+	} else {
+		myform.userName.value="";
+		myform.pwd.value="";
+		myform.userName.focus();
+	}
+}
+function toRegister(){
+	window.location.href="register.html";
+}
+function onerror(){
+	alert("您的操作有误！");
+}
+</script>
+    <div class="container">
+    	<h1>用户登录</h1>
+        <form action="" method="post" name="myform" id="myform">
+            <input type="text" name="userName" id="userName" placeholder="请输入您的用户名" />
+            <input type="password" name="pwd" id="pwd" placeholder="请输入您的密码" />
+            <button type="button" name="login" id="login" style="background:#09F; border: 1px solid #0CF; width:150px" onclick="loginSubmit(this.form)"/>登 录</button>
+            <button type="button" name="register" id="register" style="background:#0C0; border: 1px solid #0C9; width:150px" onclick="toRegister()">注册</button>
+        </form>
+    </div>
+</body>
+</html>

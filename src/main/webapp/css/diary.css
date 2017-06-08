@@ -1,0 +1,161 @@
+@charset "utf-8";
+/* CSS Document */
+
+#box {
+	font-family: "Microsoft YaHei UI";
+	width: 100%;
+	height: auto;
+	margin: 30px auto 0 auto;
+}
+form {
+	position: relative;
+	width: 1280px;
+	margin: 15px auto 0 auto;
+}
+#control {
+	background: #343434;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+#model {
+	color: #fff;
+	text-align: center;
+	margin-bottom: 15px;
+}
+#model a {
+	text-decoration: none;
+	background: #2C91ED;
+	color: #FFF;
+	padding: 5px 15px 5px 15px;
+	border-radius: 3px;
+	/* transition */
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s;
+}
+#model a:hover {
+	background: #2984D9;
+}
+#title {
+	margin-top: 40px;
+	color: #fff;
+	text-align: center;
+}
+#diarybg {
+	width: 1280px;
+	height: 1280px;
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	background-image: url(../images/diaryBG_1.jpg);
+}
+#girdLayout {
+	float: left;
+	padding-top: 90px;
+	padding-bottom: 15px;
+	padding-left: 5px;
+	padding-right: 105px;
+}
+input {
+	width: 250px;
+	height: 30px;
+	padding: 0 10px;
+	background: #FFF;
+	/* border */
+	-moz-border-radius: 6px; /* firefox */
+    -webkit-border-radius: 6px; /* google */
+	border-radius: 6px;
+	border: 1px solid #CCC;
+	/* box-shadow */
+	box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+	-moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+	/* text */
+	font-family: "Microsoft YaHei UI";
+	font-size: 14px;
+	text-shadow: 0 1px 2px rgba(0,0,0,.1);
+	color: #999;
+	/* transition */
+	-o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s;
+}
+#opt {
+	list-style: none;
+}
+#opt li {
+	font-size: 20px;
+	margin-top: 30px;
+}
+#opt li a {
+	border-radius: 2px;
+	text-decoration: none;
+	color: #FFF;
+	padding: 6px 6px;
+	background: #333;
+}
+#preview {
+	width: 100%;
+	text-align: center;
+}
+#preview button {
+	cursor: pointer;
+	width: 150px;
+	height: 44px;
+	margin-top: 30px;
+	background:#09F; 
+	border: 1px solid #0CF;
+	/* border */
+	border-radius: 6px;
+	-moz-border-radius: 6px; /* firefox */
+    -webkit-border-radius: 6px; /* google */
+	/* box-shadow */
+	-moz-box-shadow:
+        0 15px 30px 0 rgba(255,255,255,.25) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+    -webkit-box-shadow:
+        0 15px 30px 0 rgba(255,255,255,.25) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+    box-shadow:
+        0 15px 30px 0 rgba(255,255,255,.25) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+	/* text */
+	font-family: "Microsoft YaHei UI";
+	font-size: 14px;
+	font-weight: 700;
+	color: #fff;
+	text-shadow: 0 1px 2px rgba(0,0,0,.1);
+	/* transition */
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s;
+}
+
+#preview button:hover {
+    -moz-box-shadow:
+        0 15px 30px 0 rgba(255,255,255,.15) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+    -webkit-box-shadow:
+        0 15px 30px 0 rgba(255,255,255,.15) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+    box-shadow:
+        0 15px 30px 0 rgba(255,255,255,.15) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+}
+
+#preview button:active {
+    -moz-box-shadow:
+        0 15px 30px 0 rgba(255,255,255,.15) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+    -webkit-box-shadow:
+        0 15px 30px 0 rgba(255,255,255,.15) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+    box-shadow:        
+        0 5px 8px 0 rgba(0,0,0,.1) inset,
+        0 1px 4px 0 rgba(0,0,0,.1);
+
+    border: 0px solid #ef4300;
+}

@@ -1,0 +1,88 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	margin:0px;
+	padding:0px;
+	min-width: 1000px;
+	background: #EDF0F6;
+}
+
+#top_box {
+	width: 100%;
+	font-family: "Microsoft YaHei UI";
+}
+
+#header{
+	width: 100%;
+	min-height:70px;
+	background: #151E2B;
+	overflow: hidden;
+	padding-top: 15px;
+	background: url('../images/top_header.gif') left top repeat;
+	border-bottom: 3px solid #1c1e21;
+}
+
+#header1 {
+	width: 50%;
+	float: left;
+	text-align: center;
+}
+
+#header2 {
+	width: 50%;
+	float: left;
+	text-align: center;
+}
+
+#banner {
+	color: #FFF;
+	background: url('../images/banner.jpg') center;
+	background-size: cover;
+	text-align: center;
+}
+#wrapper {
+	padding-top:150px;
+	padding-bottom:150px;
+}
+#wrapper h1 {
+	font-size: 40px;
+}
+
+#content li {
+	display: inline;	/* 变成内元素 */
+	list-style: none;
+	margin-right: 10px;	
+}
+
+#content li a {
+	color: #CCC;
+	text-decoration: none;
+}
+
+#content li a:hover {
+	color: #FFF;	
+}
+
+#button {
+	text-decoration: none;
+	background: #2C91ED;
+	color: #FFF;
+	padding: 10px 33px 10px 33px;
+	border-radius: 3px;
+	/* transition */
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s;
+}
+
+#button:hover {
+	background: #2984D9;
+}
+
+#mytext {
+	margin-top: 80px;
+	margin-bottom: 80px;
+	font-size: 36px;
+	text-align: center;
+}

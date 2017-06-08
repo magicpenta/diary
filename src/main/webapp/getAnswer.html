@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>找回密码</title>
+
+<link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+<script language="javascript">
+function checkForm(form){
+	if(form.userName.value==""){
+		document.getElementById("div_userName").style.display='block';	
+	} else {
+		document.getElementById("div_userName").style.display='none';
+	}
+}
+</script>
+    <div class="container">
+    	<h1>找回密码</h1>
+        <form action="UserServlet?action=getAnswer" method="post" name="myform" id="myform">
+            <input type="text" name="userName" id="userName" placeholder="请输入您的用户名" />
+            <button type="submit" name="next" id="next" style="background:#09F; border: 1px solid #0CF; width:300px" onclick="checkForm(this.form)"/>下一步</button>
+            <div id="div_userName" class="errorPane_1">
+            	<span>请输入您的用户名！</span>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

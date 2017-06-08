@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户注册</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+<script language="javascript" src="js/AjaxRequest.js"></script>
+<script language="javascript" src="js/checkUser.js"></script>
+<script language="javascript">
+
+var flag_user=true;		//记录用户是否合法
+var flag_pwd=true;		//记录密码是否合法
+var flag_repwd=true;	//确认密码是否通过
+var flag_email=true;	//记录E-mail地址是否合法
+
+// 检查用户名是否合法
+function checkUser(str){
+	if(str==""){
+		document.getElementById("span_user").innerHTML="用户名不能为空！";
+		document.getElementById("div_user").style.display='block';
+		flag_user=false;	
+	} else if(!checkUserName(str)){
+		document.getElementById("span_user").innerHTML="您输入的账号不合法！";
+		document.getElementById("div_user").style.display='block';
+		flag_user=false;
+	} else{
+		// 异步操作，判断用户是否已注册
+		var loader=new net.AjaxRequest("UserServlet?action=checkUser&userName="+str+"&nocache="+new Date().getTime(),deal,onerror,"POST");
+	}
+}
+// 检查用户名是否已注册
+function deal(){
+	var result=this.req.responseText;
+	result=result.replace(/\s/g,"");	// 去除Unicode空白符
+	if(result=="1"){
+		document.getElementById("span_user").innerHTML="";
+		document.getElementById("div_user").style.display='none';	
+		flag_user=true;
+	} else {
+		document.getElementById("span_user").innerHTML=result;
+		document.getElementById("div_user").style.display='block';	
+		flag_user=false;
+	}
+}
+// 检查密码是否合法
+function checkPwd(str){
+	if(str==""){
+		document.getElementById("span_pwd").innerHTML="密码不能为空！";
+		document.getElementById("div_pwd").style.display='block';
+		flag_pwd=false;	
+	} else if(!checkPassword(str)){
+		document.getElementById("span_pwd").innerHTML="您输入的密码不合法！";
+		document.getElementById("div_pwd").style.display='block';
+		flag_pwd=false;
+	} else {
+		document.getElementById("span_pwd").innerHTML="";
+		document.getElementById("div_pwd").style.display='none';
+		flag_pwd=true;
+	}
+}
+// 检查确认密码是否准确
+function checkRePwd(str){
+	if(str==""){
+		document.getElementById("span_repwd").innerHTML="确认密码不能为空！";
+		document.getElementById("div_repwd").style.display='block';	
+		flag_repwd=false;
+	} else if(myform.pwd.value!=str){
+		document.getElementById("span_repwd").innerHTML="两次输入密码不一致！";
+		document.getElementById("div_repwd").style.display='block';
+		flag_repwd=false;
+	} else {
+		document.getElementById("span_repwd").innerHTML="";
+		document.getElementById("div_repwd").style.display='none';
+		flag_repwd=true;
+	}
+}
+// 检查邮箱是否合法
+function checkEmail(str){
+	if(str==""){
+		document.getElementById("span_email").innerHTML="邮箱不能为空！";
+		document.getElementById("div_email").style.display='block';	
+		flag_email=false;
+	} else if(!checkEmailAdd(str)){
+		document.getElementById("span_email").innerHTML="您输入的邮箱不合法！";
+		document.getElementById("div_email").style.display='block';
+		flag_email=false;
+	} else{
+		document.getElementById("span_email").innerHTML="";
+		document.getElementById("div_email").style.display='none';
+		flag_email=true;
+	}
+}
+// 注册按钮
+function save(){
+	if(myform.userName.value==""){		//当用户名为空时
+		alert("请输入用户名！");myform.user.focus();return;
+	}
+	if(myform.pwd.value==""){		//当密码为空时
+		alert("请输入密码！");myform.pwd.focus();return;
+	}
+	if(myform.repwd.value==""){		//当没有输入确认密码时
+		alert("请确认密码！");myform.repwd.focus();return;
+	}
+	if(myform.repwd.value!=myform.pwd.value){
+		alert("两次输入密码不一致！");myform.repwd.focus();return;
+	}
+	if(myform.email.value==""){		//当E-mail地址为空时
+		alert("请输入邮箱！");myform.email.focus();return;
+	}
+	if(flag_user && flag_pwd && flag_repwd && flag_email) {	//所有数据都符合要求时
+		var param="userName="+myform.userName.value+"&pwd="+myform.pwd.value+"&email="+myform.email.value+"&question="+myform.question.value+"&answer="+myform.answer.value; 		//组合参数
+		var loader=new net.AjaxRequest("UserServlet?action=save&nocache="+new Date().getTime(),deal_save,onerror,"POST",encodeURI(param));
+	}else{
+		alert("您填写的注册信息不合法，请确认！");
+	}
+}
+// 注册回调信息
+function deal_save(){
+	alert(this.req.responseText);
+	form_reset(myform);
+	window.location.href="DiaryServlet?action=listAllDiary";	
+}
+// 重置按钮
+function form_reset(form){
+	document.getElementById("div_user").style.display='none';
+	document.getElementById("div_pwd").style.display='none';
+	document.getElementById("div_repwd").style.display='none';
+	document.getElementById("div_email").style.display='none';
+}
+// 出错函数
+function onerror(){
+	alert("出错了！");	
+}
+</script>
+
+<div class="container">
+  <h1>用户注册</h1>
+  <form action="" method="post" name="myform" id="myform">
+    <input type="text" name="userName" id="userName" placeholder="请输入用户名" onblur="checkUser(this.value)"/>
+    <input type="password" name="pwd" id="pwd" placeholder="请输入密码" onblur="checkPwd(this.value)" />
+    <input type="password" name="repwd" id="repwd" placeholder="请确认密码" onblur="checkRePwd(this.value)"/>
+    <input type="email" name="email" id="email" placeholder="请输入邮箱" onblur="checkEmail(this.value)"/>
+    <input type="text" name="question" id="question" placeholder="请设置密码提示问题" />
+    <input type="text" name="answer" id="answer" placeholder="请输入提示问题答案" />
+    <button type="button" name="login" id="login" style="background:#09F; border: 1px solid #0CF;" onclick="save()"/>
+    注 册
+    </button>
+    <button type="reset" name="reset" id="reset" style="background:#0C0; border: 1px solid #0C9;" onclick="form_reset(this.form)">重 置</button>
+    <button type="button" name="close" id="close" style="background:#ef4300; border: 1px solid #ff730e;" onclick="history.back()">返 回</button>
+    <div id="div_user" class="errorPane_1"> <span id="span_user"></span> </div>
+    <div id="div_pwd" class="errorPane_2"> <span id="span_pwd">您输入的密码不合法！</span> </div>
+    <div id="div_repwd" class="errorPane_3"> <span id="span_repwd">两次输入密码不一致！</span> </div>
+    <div id="div_email" class="errorPane_4"> <span id="span_email">您输入的邮箱不合法！</span> </div>
+  </form>
+</div>
+</body>
+</html>
